@@ -1,0 +1,61 @@
+{
+  "name": "@baleada/rollup-plugin-virtual",
+  "version": "0.0.0",
+  "description": "Rollup plugin that allows you to reference virtual files at build time.",
+  "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "scripts": {
+    "prepare": "node scripts/prepare.js",
+    "test": "npx ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/baleada/rollup-plugin-virtual.git"
+  },
+  "keywords": [
+    "baleada",
+    "rollup-plugin",
+    "virtual"
+  ],
+  "author": {
+    "name": "Alex Vipond",
+    "email": "hello@alexvipond.dev",
+    "url": "https://alexvipond.dev"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/baleada/rollup-plugin-virtual/issues"
+  },
+  "homepage": "https://baleada.netlify.com",
+  "devDependencies": {
+    "@ava/babel": "^1.0.1",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@babel/runtime-corejs3": "^7.7.4",
+    "@baleada/prepare": "0.0.2",
+    "@nuxtjs/eslint-config": "^1.1.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "ava": "^3.5.0",
+    "babel-eslint": "^10.0.3",
+    "core-js": "^3.4.5",
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-ava": "^7.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.2.0",
+    "eslint-plugin-nuxt": "^0.5.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "regenerator-runtime": "^0.13.3",
+    "rollup-plugin-babel": "^4.4.0",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@rollup/pluginutils": "^3.0.8"
+  },
+  "peerDependencies": {
+    "@baleada/logic": ">=0.15.19"
+  }
+}
