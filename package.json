@@ -1,6 +1,6 @@
 {
   "name": "@baleada/rollup-plugin-virtual",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Rollup plugin that allows you to reference virtual files at build time.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
