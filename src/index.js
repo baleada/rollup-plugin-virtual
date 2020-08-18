@@ -39,11 +39,6 @@ export default function virtual (options = {}) {
     },
     async load (id) {
       if (test({ id: withoutQuery(withoutPrefix(id)), createFilter })) {
-        console.log(await transform({
-          id: withoutQuery(withoutPrefix(id)),
-          context: this,
-          utils: pluginUtils,
-        }))
         return await transform({
           id: withoutQuery(withoutPrefix(id)),
           context: this,
