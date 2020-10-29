@@ -3,7 +3,6 @@ import resolve from '@rollup/plugin-node-resolve'
 
 const external = [
         '@rollup/pluginutils',
-        '@baleada/logic',
         'path',
         'fs',
       ],
