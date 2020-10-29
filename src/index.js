@@ -2,7 +2,6 @@
 import { parse, resolve } from 'path'
 import { existsSync } from 'fs'
 import pluginUtils from '@rollup/pluginutils'
-import { clipable } from '@baleada/logic'
 
 const { createFilter } = pluginUtils
 
@@ -59,7 +58,7 @@ function resolveTest (include, exclude, test) {
 
 const queryRE = /\?.*$/
 function withoutQuery (id) {
-  return clipable(id).clip(queryRE).toString()
+  return id.replace(queryRE, '')
 }
 
 function withPrefix (id) {
@@ -67,11 +66,11 @@ function withPrefix (id) {
 }
 
 function withoutPrefix (id) {
-  return clipable(id).clip(/^\0virtual:/).toString() // As recommended by https://rollupjs.org/guide/en/#conventions
+  return id.replace(/^\0virtual:/, '') // As recommended by https://rollupjs.org/guide/en/#conventions
 }
 
 function fromFile (id) {
   const { base } = parse(id),
         baseRE = new RegExp(`/${base}$`)
-  return clipable(id).clip(baseRE).toString()
+  return id.replace(baseRE, '')
 }
