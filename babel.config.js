@@ -9,7 +9,10 @@ const presets = [
         ],
       ],
       plugins = [
-        
+        [
+          '@babel/plugin-transform-runtime',
+          { useESModules: true },
+        ]
       ]
 
 module.exports = { presets, plugins }

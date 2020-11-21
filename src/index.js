@@ -66,7 +66,7 @@ function withPrefix (id) {
 }
 
 function withoutPrefix (id) {
-  return id.replace(/^\0virtual:/, '') // As recommended by https://rollupjs.org/guide/en/#conventions
+  return id.slice(`\0virtual:`.length) // As recommended by https://rollupjs.org/guide/en/#conventions
 }
 
 function fromFile (id) {

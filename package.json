@@ -4,6 +4,10 @@
   "description": "Rollup plugin that allows you to reference virtual files at build time.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
+  "exports": {
+    "require": "./lib/index.js",
+    "import": "./lib/index.esm.js"
+  },
   "scripts": {
     "prepare": "node scripts/prepare.js",
     "test": "npx ava"
@@ -31,10 +35,12 @@
     "@ava/babel": "^1.0.1",
     "@babel/cli": "^7.7.4",
     "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.7.4",
     "@babel/runtime-corejs3": "^7.7.4",
     "@baleada/prepare": "0.0.2",
     "@nuxtjs/eslint-config": "^1.1.2",
+    "@rollup/plugin-babel": "^5.2.1",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "ava": "^3.5.0",
     "babel-eslint": "^10.0.3",
@@ -48,14 +54,10 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
     "regenerator-runtime": "^0.13.3",
-    "rollup-plugin-babel": "^4.4.0",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.11"
+    "rollup": "^2.33.3"
   },
   "dependencies": {
+    "@babel/runtime": "^7.11.2",
     "@rollup/pluginutils": "^3.0.8"
-  },
-  "peerDependencies": {
-    "@baleada/logic": ">=0.15.19"
   }
 }
