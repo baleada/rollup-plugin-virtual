@@ -65,8 +65,9 @@ function withPrefix (id) {
   return `\0virtual:` + id // As recommended by https://rollupjs.org/guide/en/#conventions
 }
 
+const virtualPrefixRE = new RegExp('\0virtual:')
 function withoutPrefix (id) {
-  return id.slice(`\0virtual:`.length) // As recommended by https://rollupjs.org/guide/en/#conventions
+  return id.replace(virtualPrefixRE, '') // As recommended by https://rollupjs.org/guide/en/#conventions
 }
 
 function fromFile (id) {

@@ -1,37 +1,21 @@
-import babel, { getBabelOutputPlugin } from '@rollup/plugin-babel'
-import resolve from '@rollup/plugin-node-resolve'
+import { configureable } from '@baleada/prepare'
 
-const external = [
-        '@rollup/pluginutils',
-        'path',
-        'fs',
-      ],
-      plugins = [
-        babel({
-          exclude: 'node_modules',
-          babelHelpers: 'runtime',
-        }),
-        resolve(),
-      ]
+const shared = configureable()
+        .input('src/index.js')
+        .external([
+          '@rollup/pluginutils',
+          'path',
+          'fs',
+        ])
+        .resolve()
 
 export default [
-  {
-    external,
-    input: 'src/index.js',
-    output: [
-      { file: 'lib/index.esm.js', format: 'esm' },
-      {
-        file: 'lib/index.js',
-        format: 'cjs',
-        plugins: [
-          getBabelOutputPlugin({
-            plugins: [
-              ['@babel/plugin-transform-runtime', { useESModules: false }]
-            ]
-          })
-        ]
-      },
-    ],
-    plugins,
-  },
+  shared
+    .delete({ targets: 'lib/*', verbose: true })
+    .esm({ file: 'lib/index.esm.js', target: 'node' })
+    .analyze()
+    .configure(),
+  shared
+    .cjs({ file: 'lib/index.js', target: 'node' })
+    .configure(),
 ]
