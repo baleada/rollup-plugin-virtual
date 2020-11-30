@@ -12,10 +12,10 @@ const shared = configureable()
 export default [
   shared
     .delete({ targets: 'lib/*', verbose: true })
-    .esm({ file: 'lib/index.esm.js', target: 'node' })
+    .esm({ file: 'lib/index.js', target: 'node' })
     .analyze()
     .configure(),
   shared
-    .cjs({ file: 'lib/index.js', target: 'node' })
+    .cjs({ file: 'lib/index.cjs', target: 'node' })
     .configure(),
 ]
