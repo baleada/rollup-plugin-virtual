@@ -6,7 +6,7 @@ import pluginUtils from '@rollup/pluginutils'
 const { createFilter } = pluginUtils
 
 export default function virtual (options = {}) {
-  const { transform, include, exclude, test: rawTest } = options,
+  const { transform, include, exclude, test: rawTest, prefixesId = false } = options,
         test = resolveTest(include, exclude, rawTest)
 
   return {
@@ -16,7 +16,7 @@ export default function virtual (options = {}) {
 
       // Handle absolute paths
       if (test({ id, createFilter })) {
-        return withPrefix(id)
+        return prefixesId ? withPrefix(id) : id
       }
 
       // Handle relative paths
@@ -30,7 +30,7 @@ export default function virtual (options = {}) {
               resolved = resolve(dir, id)
         
         if (test({ id: resolved, createFilter })) {
-          return withPrefix(resolved)
+          return prefixesId ? withPrefix(resolved) : resolved
         }
       }
 
@@ -62,12 +62,12 @@ function withoutQuery (id) {
 }
 
 function withPrefix (id) {
-  return `\0virtual:` + id // As recommended by https://rollupjs.org/guide/en/#conventions
+  return `\0virtual:` + id
 }
 
 const virtualPrefixRE = new RegExp('\0virtual:')
 function withoutPrefix (id) {
-  return id.replace(virtualPrefixRE, '') // As recommended by https://rollupjs.org/guide/en/#conventions
+  return id.replace(virtualPrefixRE, '')
 }
 
 function fromFile (id) {
