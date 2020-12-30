@@ -4,6 +4,7 @@ const shared = configureable()
         .input('src/index.js')
         .external([
           '@rollup/pluginutils',
+          'query-string',
           'path',
           'fs',
         ])

@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.11.2",
-    "@rollup/pluginutils": "^3.0.8"
+    "@rollup/pluginutils": "^3.0.8",
+    "query-string": "^6.13.7"
   }
 }

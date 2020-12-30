@@ -2,6 +2,7 @@
 import { parse, resolve } from 'path'
 import { existsSync } from 'fs'
 import pluginUtils from '@rollup/pluginutils'
+import { parse as parseQuery } from 'query-string'
 
 const { createFilter } = pluginUtils
 
@@ -12,10 +13,11 @@ export default function virtual (options = {}) {
   return {
     name: 'virtual',
     resolveId (rawId, rawImporter) {
-      const id = withoutQuery(rawId)
+      const id = withoutQuery(rawId),
+            query = toQuery(id)
 
       // Handle absolute paths
-      if (test({ id, createFilter })) {
+      if (test({ id, query, createFilter })) {
         return prefixesId ? withPrefix(id) : id
       }
 
@@ -29,7 +31,7 @@ export default function virtual (options = {}) {
               dir = existsSync(id) ? id : fromFile(importer),
               resolved = resolve(dir, id)
         
-        if (test({ id: resolved, createFilter })) {
+        if (test({ id: resolved, query, createFilter })) {
           return prefixesId ? withPrefix(resolved) : resolved
         }
       }
@@ -37,7 +39,7 @@ export default function virtual (options = {}) {
       return null // Defer to other resolveId functions
     },
     async load (id) {
-      if (test({ id: withoutQuery(withoutPrefix(id)), createFilter })) {
+      if (test({ id: withoutQuery(withoutPrefix(id)), query: toQuery(id), createFilter })) {
         return await transform({
           id: withoutQuery(withoutPrefix(id)),
           context: this,
@@ -56,9 +58,13 @@ function resolveTest (include, exclude, test) {
     : ({ id, createFilter }) => createFilter(include, exclude)(id)
 }
 
-const queryRE = /\?.*$/
+const queryRE = /(\?.*$)/
 function withoutQuery (id) {
   return id.replace(queryRE, '')
+}
+
+function toQuery (id) {
+  return parseQuery(id.match(queryRE)?.[1])
 }
 
 function withPrefix (id) {
