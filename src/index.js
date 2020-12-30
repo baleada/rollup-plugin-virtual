@@ -14,7 +14,7 @@ export default function virtual (options = {}) {
     name: 'virtual',
     resolveId (rawId, rawImporter) {
       const id = withoutQuery(rawId),
-            query = toQuery(id)
+            query = toQuery(rawId)
 
       // Handle absolute paths
       if (test({ id, query, createFilter })) {
